@@ -7,11 +7,6 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import com.stripe.android.view.CardInputWidget
-import com.stripe.android.Stripe
-import com.stripe.android.TokenCallback
-import com.stripe.android.model.Token
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -48,27 +43,7 @@ class StripeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_stripe, container, false)
-        val cardInputWidget = view.findViewById(R.id.card_input_widget) as CardInputWidget
-        val stripe = activity?.let { Stripe(it, "pk_test_Ur1C5UHloH1S7kDHsDkALkvE") }
-        cardInputWidget.card?.let {
-            stripe?.createToken(
-                it,
-                object : TokenCallback {
-                    override fun onSuccess(token: Token) {
-                        // Send token to your server
-                    }
 
-                    override fun onError(error: Exception) {
-                        // Show localized error message
-                        Toast.makeText(
-                            context,
-                            error.localizedMessage,
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
-                }
-            )
-        }
         return view
     }
 
